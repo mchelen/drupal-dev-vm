@@ -119,15 +119,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # AWS
-  config.vm.provider :aws do |v|
-    v.access_key_id = ENV['AWS_ACCESS_KEY']
-    v.secret_access_key = ENV['AWS_SECRET_KEY']
-    v.keypair_name = ENV['AWS_KEY_NAME']
-    v.ami = "ami-9a562df2"
-    v.region = "us-east-1"
-    v.instance_type = "t2.micro"
-    v.subnet_id = "subnet-55dea56f"
-#    v.associate_public_ip = true
+  config.vm.provider :aws do |aws, override|
+    aws.access_key_id = ENV['AWS_ACCESS_KEY']
+    aws.secret_access_key = ENV['AWS_SECRET_KEY']
+    aws.keypair_name = ENV['AWS_KEY_NAME']
+    aws.ami = "ami-9a562df2"
+    aws.region = "us-east-1"
+    aws.instance_type = "t2.micro"
+    aws.subnet_id = "subnet-55dea56f"
+#    aws.associate_public_ip = true
     override.ssh.username = "ubuntu"
     override.ssh.private_key_path = ENV['AWS_KEY_PATH']
   end  
