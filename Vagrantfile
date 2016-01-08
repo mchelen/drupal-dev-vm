@@ -118,6 +118,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     p.cpus = vconfig['vagrant_cpus']
   end
 
+  # AWS
+  config.vm.provider :aws do |v|
+    v.access_key_id = ENV['AWS_ACCESS_KEY']
+    v.secret_access_key = ENV['AWS_SECRET_KEY']
+    v.keypair_name = ENV['AWS_KEY_NAME']
+    v.ami = "ami-9a562df2"
+    v.region = "us-east-1"
+    v.instance_type = "t2.micro"
+    v.subnet_id = "subnet-55dea56f"
+#    v.associate_public_ip = true
+    override.ssh.username = "ubuntu"
+    override.ssh.private_key_path = ENV['AWS_KEY_PATH']
+  end  
+
   # Set the name of the VM. See: http://stackoverflow.com/a/17864388/100134
   config.vm.define vconfig['vagrant_machine_name'] do |d|
   end
